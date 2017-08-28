@@ -1,0 +1,11 @@
+version: '2'
+services:
+  kafka1:
+    image: mpidlisnyi/kafka:0.10.2.1
+    command: kafka-server-start.sh /etc/kafka/server.properties --override inter.broker.protocol.version=0.10.2 --override log.message.format.version=0.10.2 --override broker.id=1 --override advertised.host.name=kafka1 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+  kafka2:
+    image: mpidlisnyi/kafka:0.10.2.1
+    command: kafka-server-start.sh /etc/kafka/server.properties --override inter.broker.protocol.version=0.10.2 --override log.message.format.version=0.10.2 --override broker.id=2 --override advertised.host.name=kafka2 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+  kafka3:
+    image: mpidlisnyi/kafka:0.10.2.1
+    command: kafka-server-start.sh /etc/kafka/server.properties --override inter.broker.protocol.version=0.10.2 --override log.message.format.version=0.10.2 --override broker.id=3 --override advertised.host.name=kafka3 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181

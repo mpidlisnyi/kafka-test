@@ -6,7 +6,7 @@ services:
   kafka1:
     image: mpidlisnyi/kafka:0.10.0.0
     restart: unless-stopped
-    mem_limit: 256M
+    mem_limit: 512M
     command: kafka-server-start.sh /etc/kafka/server.properties --override broker.id=1 --override advertised.host.name=kafka1 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
     volumes:
       - ./config:/etc/kafka:ro
@@ -17,7 +17,7 @@ services:
   kafka2:
     image: mpidlisnyi/kafka:0.10.0.0
     restart: unless-stopped
-    mem_limit: 256M
+    mem_limit: 512M
     command: kafka-server-start.sh /etc/kafka/server.properties --override broker.id=2 --override advertised.host.name=kafka2 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
     volumes:
       - ./config:/etc/kafka:ro
@@ -28,7 +28,7 @@ services:
   kafka3:
     image: mpidlisnyi/kafka:0.10.0.0
     restart: unless-stopped
-    mem_limit: 256M
+    mem_limit: 512M
     command: kafka-server-start.sh /etc/kafka/server.properties --override broker.id=3 --override advertised.host.name=kafka3 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
     volumes:
       - ./config:/etc/kafka:ro
