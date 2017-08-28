@@ -20,3 +20,10 @@ All changes during upgrading test you can do in docker-compose.upgrade.yml witho
 ```
 docker-compose -f docker-compose.yml -f docker-compose.volumes.yml -f docker-compose.upgrade.yml up -d
 ```
+
+### Kafka tools
+
+You able to use all Kafka tools which distributed with Kafka code. For example kafka-topics.sh script for topic describing
+```
+docker-compose -f docker-compose.yml -f docker-compose.volumes.yml -f docker-compose.upgrade.yml exec kafka3 kafka-topics.sh --zookeeper zookeeper3:2181 --describe
+```
