@@ -1,0 +1,66 @@
+version: '2'
+networks:
+  kafka:
+    driver: bridge
+services:
+  kafka1:
+    image: mpidlisnyi/kafka:0.10.0.0
+    restart: unless-stopped
+    mem_limit: 512M
+    command: kafka-server-start.sh /etc/kafka/server.properties --override broker.id=1 --override advertised.host.name=kafka1 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+    volumes:
+     - ./config:/etc/kafka
+    networks:
+     - kafka
+    links:
+      - zookeeper1
+  kafka2:
+    image: mpidlisnyi/kafka:0.10.0.0
+    restart: unless-stopped
+    mem_limit: 512M
+    command: kafka-server-start.sh /etc/kafka/server.properties --override broker.id=2 --override advertised.host.name=kafka2 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+    volumes:
+     - ./config:/etc/kafka
+    networks:
+     - kafka
+    links:
+      - zookeeper1
+  kafka3:
+    image: mpidlisnyi/kafka:0.10.0.0
+    restart: unless-stopped
+    mem_limit: 512M
+    command: kafka-server-start.sh /etc/kafka/server.properties --override broker.id=3 --override advertised.host.name=kafka3 --override zookeeper.connect=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+    volumes:
+     - ./config:/etc/kafka
+    networks:
+     - kafka
+    links:
+      - zookeeper1
+  zookeeper1:
+    image: mpidlisnyi/zookeeper
+    restart: unless-stopped
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888 server.2=zookeeper2:2888:3888 server.3=zookeeper3:2888:3888
+    networks:
+     - kafka
+  zookeeper2:
+    image: mpidlisnyi/zookeeper
+    restart: unless-stopped
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888 server.2=zookeeper2:2888:3888 server.3=zookeeper3:2888:3888
+    networks:
+     - kafka
+    links:
+      - zookeeper1
+  zookeeper3:
+    image: mpidlisnyi/zookeeper
+    restart: unless-stopped
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888 server.2=zookeeper2:2888:3888 server.3=zookeeper3:2888:3888
+    networks:
+     - kafka
+    links:
+      - zookeeper2
