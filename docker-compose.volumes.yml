@@ -1,0 +1,11 @@
+version: '2'
+services:
+  kafka1:
+    volumes:
+     - /var/kafka_test/1:/var/kafka
+  kafka2:
+    volumes:
+     - /var/kafka_test/2:/var/kafka
+  kafka3:
+    volumes:
+     - /var/kafka_test/3:/var/kafka
